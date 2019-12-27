@@ -4,7 +4,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
-		person:{},
-		authCheck : false
+		person : {},
+		loginstate : true,
+		sidebar : 'preSidebar',
+		headerMessage : '공통화면',
+		list : {}
   }
 })

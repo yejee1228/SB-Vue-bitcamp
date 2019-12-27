@@ -16,7 +16,8 @@ export default {
 	methods:{
 		logout(){
       alert(`로그아웃`)
-      store.state.person={}
+		store.state.person={}
+		store.state.authCheck=false
       this.$router.push({path:'/login'})
 	},
 		withdrawl(){

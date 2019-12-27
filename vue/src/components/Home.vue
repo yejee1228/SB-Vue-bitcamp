@@ -4,15 +4,11 @@
 		<template #header="header">
 			<h1>{{header.title}}</h1>
 			<div class="headerdiv">
-				<component :is="!loginCheck ? 'pre-auth' : 'post-auth'"></component>
+				<component :is="whichCompo ? 'LogOutHeader' : 'LogInHeader' "></component>
 			</div>
 		</template>
 		<template #sidebar="sidebar">
-			<ul class="menu">
-				<li v-for="i of sidebars" :key="i.menu">
-					<router-link :to="i.link">{{i.menu}}</router-link>
-				</li>
-			</ul>
+			<component :is="sidebarCheck"></component>
 		</template>
 		<template #content="content">
 			<router-view/>
@@ -25,34 +21,29 @@
 </template>
 <script>
 import Layout from "@/components/cmm/Layout.vue"
-import PostAuth from "@/components/cmm/PostAuth.vue"
-import PreAuth from "@/components/cmm/PreAuth.vue"
+import LogInHeader from "@/components/cmm/LogInHeader.vue"
+import LogOutHeader from "@/components/cmm/LogOutHeader.vue"
+import AdminSidebar from "@/components/cmm/AdminSidebar.vue"
+import StudentSidebar from "@/components/cmm/StudentSidebar.vue"
+import PreSidebar from "@/components/cmm/PreSidebar.vue"
 import {store} from "../store"
 export default {
-	name : 'home',
-	components : {
-		Layout, PostAuth, PreAuth
-	},
+components : {Layout, LogInHeader, LogOutHeader, 
+							StudentSidebar, AdminSidebar, PreSidebar},
 	data(){
 		return{
-			sidebars:[
-				{menu:"호오옴", link: "/"},
-				{menu:"글쓰기", link: "/write"},
-				{menu:"글목록", link: "/list"},
-				{menu:"글수정", link: "/update"},
-				{menu:"글삭제", link: "/remove"},
-				{menu:"거엄색", link: "/search"}
-			],
-			login: "/login",
-			join: "/join",
 		}
 	},
-	computed:{
-		loginCheck: function(){
-			return store.state.authCheck
-		}
-		
+	methods : {
+	},
+	computed: {
+    whichCompo () {
+		return store.state.loginstate
+	},
+	sidebarCheck : function () {
+		return store.state.sidebar
 	}
+  }
 }
 </script>
 <style scoped>

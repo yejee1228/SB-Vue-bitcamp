@@ -9,12 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name = "PERSON")
+@Table(name="PERSON",
+uniqueConstraints={
+@UniqueConstraint(
+       columnNames={"USERID"}
+)
+})
 public class Person {
 	@Id
 	@GeneratedValue
@@ -24,32 +30,33 @@ public class Person {
 	@Column(name = "NAME", length = 64, nullable=false) private String name;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "BIRTHDAY", nullable=false) private Date birthday;
-	@Column(name = "GENDER", nullable=false) private String gender;
-	@Column(name = "HAK", nullable=false) private String hak;
-	@Column(name = "BAN", nullable=false) private String ban;
-	@Column(name = "SCORE", nullable=false) private String score;
-	public String getGender() {
-		return gender;
+	@Column(name = "MALE", nullable=false) private boolean male;
+	public boolean isMale() {
+		return male;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setMale(boolean male) {
+		this.male = male;
 	}
-	public String getHak() {
-		return hak;
+
+	@Column(name = "HAK", nullable=false) private int hak;
+	@Column(name = "BAN", nullable=false) private int ban;
+	@Column(name = "SCORE", nullable=false) private int score;
+	
+	@Column(name = "ROLE", nullable=false) private String role;
+	
+	public String getRole() {
+		return role;
 	}
-	public void setHak(String hak) {
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public void setHak(int hak) {
 		this.hak = hak;
 	}
-	public String getBan() {
-		return ban;
-	}
-	public void setBan(String ban) {
+	public void setBan(int ban) {
 		this.ban = ban;
 	}
-	public String getScore() {
-		return score;
-	}
-	public void setScore(String score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 	public Long getId() {
@@ -82,6 +89,18 @@ public class Person {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+	public int getHak() {
+		return hak;
+	}
+	public int getBan() {
+		return ban;
+	}
+	public int getScore() {
+		return score;
+	}
 	
+	enum Level {
+		HIGH, MID, LOW
+	}
 	
 }

@@ -2,7 +2,7 @@
   <table>
     <tr>
       <td>
-        <h2>{{person.name}}의 마이페이지</h2>
+        <h2>{{person.name}}의 관리자 페이지</h2>
       </td>
     </tr>
     <tr>
@@ -13,11 +13,12 @@
       </td>
     </tr>
     <tr>
-      <td><legend><h3>성적 확인</h3></legend>
+      <td><legend><h3>학생부 관리</h3></legend>
       <h5>{{person.hak}} 학년</h5>
       <h5>{{person.ban}} 반</h5>
       <h5>{{person.score}}점</h5>
       <br/><br/>
+      <button @click.prevent="goUpdate">수정</button>
       </td>
     </tr>
   </table>
@@ -29,9 +30,6 @@ export default{
 		return {
       context : 'http://localhost:8080/',
       person : store.state.person,
-      sidebars: [
-				{menu:"비밀번호 수정",link:"/update"}
-      ],
       authCheck : true
 		}
 		

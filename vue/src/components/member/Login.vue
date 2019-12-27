@@ -50,9 +50,17 @@ export default {
         if(res.data.result === "SUCCESS"){
           alert(`로그인 성공 : ${this.userid}`)
           store.state.person = res.data.person
-          store.state.authCheck = true
+          store.state.authCheck = false
           alert(`스토어에 저장 성공 ${store.state.person.name}`)
-          this.$router.push({path:'/mypage'})
+          if(store.state.person.role !== 'student'){
+            store.state.sidebar = 'adminSidebar'
+            store.state.headerMessage = '관리자 화면'
+            this.$router.push({path: '/students'})
+          }else{
+            store.state.sidebar = 'studentSidebar'
+            store.state.headerMessage = '학생 화면'
+            this.$router.push({path: '/myPage'})
+          }
         }else{
           alert(`로그인 실패 `)
           this.$router.push({path:'/login'})
