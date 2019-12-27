@@ -2,6 +2,7 @@ package com.hanrabong.web.person;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -100,8 +101,12 @@ public class PersonController {
 			for(Person p: entites) {
 				PersonDTO dto = modelMapper.map(p, PersonDTO.class);
 				list.add(dto);
-				break;
 			}
+		break;
+		case "streamToMap": break;
+		case "streamToArray": break;
+		case "theNumberOfStudents": break;
+		case "totalScore": break;
 		}
 		//Iterable<Person> entites=personRepository.findByRole("student"); 
 		

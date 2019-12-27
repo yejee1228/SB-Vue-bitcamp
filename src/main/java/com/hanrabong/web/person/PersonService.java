@@ -12,12 +12,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hanrabong.web.util.Printer;
-
 @Service
 public class PersonService {
 	@Autowired private PersonRepository personRepository;
-	@Autowired private Printer printer;
 	
     // 자바의 정석 847 collect()
     public List<String> namesOfStudents() {
