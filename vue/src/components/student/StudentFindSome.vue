@@ -9,24 +9,25 @@
             <button @click.prevent="find" type="submit" class="btn btn-primary btn-block">전 송</button>
         </div>
     </form>
-	<a @click.prevent="namesOfStudents">학생의 이름</a>       
-	<a @click.prevent="streamToArray">스트림을 배열로 전환</a>       
-	<a @click.prevent="streamToMap">스트림을 맵으로 전환. 학생이름이  key</a>       
-	<a @click.prevent="theNumberOfStudents">학생의 수</a>       
-	<a @click.prevent="totalScore">학생들 총점</a>       
-	<a @click.prevent="topStudent">1등 학생</a>       
-	<a @click.prevent="getStat">전체 학생 성적 통계</a>       
-	<a @click.prevent="nameList">전체 학생 이름</a>       
-	<a @click.prevent="partioningByGender">단순분할 (성별로 분할) 남성 true  여성 false</a>       
-	<a @click.prevent="partioningCountPerGender">단순분할 (성별 학생수)</a>       
-	<a @click.prevent="partioningTopPerGender">.단순분할 (성별 1등) 남성 true  여성 false</a>       
-	<a @click.prevent="partioningRejectPerGender">다중분할 (성별 불합격자,  50점이하) 남성 true 여성 false</a>       
-	<a @click.prevent="findByHak">단순 그룹화(반별로 그룹화)</a>       
-	<a @click.prevent="groupByGrade">단순그룹화(성적별로 그룹화)</a>       
-	<a @click.prevent="personCountByLevel">단순그룹화 + 통계(성적별 학생수)</a>       
-	<a @click.prevent="multiGrouping">다중 그룹화 (학년별, 반별)</a>       
-	<a @click.prevent="multiGroupingMax">다중 그룹화 +통계 (학년별, 반별  1등)</a>       
-	<a @click.prevent="multiGroupingGrade">다중그룹화 + 통계(학년별, 반별  성적그룹)</a>       
+	<a @click.prevent="namesOfStudents">학생의 이름</a><br/>       
+	<a @click.prevent="streamToArray">스트림을 배열로 전환</a><br/>        
+	<a @click.prevent="streamToMap">스트림을 맵으로 전환. 학생이름이  key</a><br/>        
+	<a @click.prevent="theNumberOfStudents">학생의 수</a><br/>        
+	<a @click.prevent="totalScore">학생들 총점</a><br/>        
+	<a @click.prevent="topStudent">1등 학생</a><br/>        
+	<a @click.prevent="getStat">전체 학생 성적 통계</a><br/>        
+	<a @click.prevent="nameList">전체 학생 이름</a><br/>        
+	<a @click.prevent="partitioningByGender">단순분할 (성별로 분할) 남성 true  여성 false</a><br/>        
+	<a @click.prevent="partitioningCountPerGender">단순분할 (성별 학생수)</a><br/>        
+	<a @click.prevent="partitioningTopPerGender">.단순분할 (성별 1등) 남성 true  여성 false</a><br/>        
+	<a @click.prevent="partitioningRejectPerGender">다중분할 (성별 불합격자,  50점이하) 남성 true 여성 false</a><br/>        
+	<a @click.prevent="findByBan">단순 그룹화(반별로 그룹화)</a><br/>        
+	<a @click.prevent="findByHak">단순 그룹화(학년별로 그룹화)</a><br/>        
+	<a @click.prevent="groupByGrade">단순그룹화(성적별로 그룹화)</a><br/>        
+	<a @click.prevent="personCountByLevel">단순그룹화 + 통계(성적별 학생수)</a><br/>        
+	<a @click.prevent="multiGrouping">다중 그룹화 (학년별, 반별)</a><br/>        
+	<a @click.prevent="multiGroupingMax">다중 그룹화 +통계 (학년별, 반별  1등)</a><br/>        
+	<a @click.prevent="multiGroupingGrade">다중그룹화 + 통계(학년별, 반별  성적그룹)</a><br/>        
 	<!--
 	<div>학생 조건 검색결과  
 	<table class="table"><tr>
@@ -62,6 +63,7 @@ export default{
 	},
 	methods : {
 		find(){
+			alert(`${this.searchWord} 클릭`)
 			axios
 			.get(`${this.context}/students/${this.searchWord}`)
 			.then(res =>{
@@ -74,7 +76,13 @@ export default{
 		},
 		topByGrade(){
 			this.searchWord = "topByGrade"
-		}
+		},
+		partitioningByGender(){
+			this.searchWord = "partitioningByGender"
+		},
+		findByHak(){
+			this.searchWord = "findByHak"
+		},
 	}
 	
 }

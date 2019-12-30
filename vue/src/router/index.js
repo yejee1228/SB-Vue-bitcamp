@@ -2,7 +2,7 @@ import Vue from "vue"
 import Router from "vue-router"
 import Login from "@/components/member/Login.vue"
 import Join from "@/components/member/Join.vue"
-import MyPage from "@/components/member/HanrabongMypage.vue"
+//import MyPage from "@/components/MaPageRPM.vue"
 import Admin from '@/components/member/Admin'
 import ArticleAdd from '@/components/board/ArticleAdd'
 import ArticleEdit from '@/components/board/ArticleEdit'
@@ -24,7 +24,7 @@ export default new Router({
 	routes : [
 		{path: '/login', name : 'login', component: Login},
 		{path: '/join', name : 'join', component: Join},
-		{path: '/mypage', name : 'mypage', component: MyPage},
+//		{path: '/mypage', name : 'mypage', component: MyPage},
 		{path:'/admin', name : 'admin', component : Admin},
 		{path:'/articleAdd', name : 'articleAdd', component : ArticleAdd},
 		{path:'/articleEdit', name : 'articleEdit', component : ArticleEdit},

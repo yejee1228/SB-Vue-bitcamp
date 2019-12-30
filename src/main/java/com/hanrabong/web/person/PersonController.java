@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hanrabong.web.proxy.Box;
 import com.hanrabong.web.util.Printer;
 
 @RestController
@@ -29,6 +30,7 @@ public class PersonController {
 	@Autowired private Person person;
 	@Autowired ModelMapper modelMapper;
 	@Bean public ModelMapper modelMapper() { return new ModelMapper(); }
+	@Autowired Box<?> box;
 	
 	@RequestMapping("/")
 	public String index() {
@@ -60,7 +62,7 @@ public class PersonController {
 	public void withdrawl(@PathVariable String userid) {
 		printer.accept("컨트롤러");
 		person = personRepository.findByUserid(userid);
-		personRepository.deleteById(person.getId());
+		personRepository.deleteById(person.getPersonid());
 	}
 	
 	@PutMapping("/update")
@@ -80,26 +82,28 @@ public class PersonController {
 		return map;
 	}
 	@GetMapping("/students")
-	public Stream<PersonDTO> list(){
+	public Stream<Person> list(){
 		/* Iterable<Person> entites=personRepository.findByRole("student"); */
 		Iterable<Person> entites = personRepository.findAll();	
-		List<PersonDTO> list = new ArrayList<>();
+		List<Person> list = new ArrayList<>();
 		for(Person p:entites) {
-			PersonDTO dto = modelMapper.map(p,PersonDTO.class);
+			Person dto = modelMapper.map(p,Person.class);
 			list.add(dto);
 		}
 		return list.stream().filter(role-> role.getRole().equals("student"));
 	}
 	
 	@GetMapping("/students/{searchWord}")
-	public Stream<PersonDTO> findSome(@PathVariable String searchWord){
-		List<PersonDTO> list = new ArrayList<>();
+	public Stream<Person> findSome(@PathVariable String searchWord){
+		List<Person> list = new ArrayList<>();
+		String searchkey = "";
 		printer.accept("controller"+ searchWord);
+		
 		switch(searchWord) {
-		case "topByGrade" : 
+		case "namesOfStudents" : 
 			Iterable<Person> entites = personRepository.findGroupByHak();
 			for(Person p: entites) {
-				PersonDTO dto = modelMapper.map(p, PersonDTO.class);
+				Person dto = modelMapper.map(p, Person.class);
 				list.add(dto);
 			}
 		break;
@@ -107,6 +111,54 @@ public class PersonController {
 		case "streamToArray": break;
 		case "theNumberOfStudents": break;
 		case "totalScore": break;
+		case "topStudent": break;
+		case "getStat": break;
+		case "nameList": break;
+		case "남학생 목록": case "여학생 목록": 
+			searchkey = (searchWord == "남")? "partitioningByMale" :"partitioningByFemale";
+			break;
+		case "partitioningCountPerGender": break;
+		case "partitioningTopPerGender": break;
+		case "partitioningRejectPerGender": break;
+		case "findByHak": 
+			/*
+			 * Iterable<Person> entites = personRepository.findGroupByHak(); for(Person p:
+			 * entites) { PersonDTO dto = modelMapper.map(p, PersonDTO.class);
+			 * list.add(dto); }
+			 */
+			break;
+		case "findByBan": break;
+		case "groupByGrade": break;
+		case "personCountByLevel": break;
+		case "multiGrouping": break;
+		case "multiGroupingMax": break;
+		case "multiGroupingGrade":break;
+		}
+		switch(searchkey) {
+		case "namesOfStudents" : 
+			
+			break;
+		case "streamToMap": break;
+		case "streamToArray": break;
+		case "theNumberOfStudents": break;
+		case "totalScore": break;
+		case "topStudent": break;
+		case "getStat": break;
+		case "nameList": break;
+		case "partitioningByMale": 
+			;
+			break;
+		case "partitioningByFemale": break;
+		case "partioningCountPerGender": break;
+		case "partioningTopPerGender": break;
+		case "partioningRejectPerGender": break;
+		case "findByHak": break;
+		case "findByBan": break;
+		case "groupByGrade": break;
+		case "personCountByLevel": break;
+		case "multiGrouping": break;
+		case "multiGroupingMax": break;
+		case "multiGroupingGrade":break;
 		}
 		//Iterable<Person> entites=personRepository.findByRole("student"); 
 		
