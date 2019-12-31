@@ -4,7 +4,7 @@
 		<template #header="header">
 			<h1>{{header.title}}</h1>
 			<div class="headerdiv">
-				<component :is="whichCompo ? 'LogOutHeader' : 'LogInHeader' "></component>
+				<component :is="whichCompo ? 'LogInHeader' : 'LogOutHeader'"></component>
 			</div>
 		</template>
 		<template #sidebar="sidebar">
@@ -26,7 +26,6 @@ import LogOutHeader from "@/components/cmm/LogOutHeader.vue"
 import AdminSidebar from "@/components/cmm/AdminSidebar.vue"
 import StudentSidebar from "@/components/cmm/StudentSidebar.vue"
 import PreSidebar from "@/components/cmm/PreSidebar.vue"
-import {store} from "../store"
 export default {
 components : {Layout, LogInHeader, LogOutHeader, 
 							StudentSidebar, AdminSidebar, PreSidebar},
@@ -34,16 +33,16 @@ components : {Layout, LogInHeader, LogOutHeader,
 		return{
 		}
 	},
-	methods : {
-	},
 	computed: {
-    whichCompo () {
-		return store.state.loginstate
-	},
-	sidebarCheck : function () {
-		return store.state.sidebar
+		whichCompo () {
+			return this.$store.state.loginstate
+			//alert(`this.$store.state.loginstate${this.$store.state.loginstate}`)
+		},
+		sidebarCheck : function () {
+			return this.$store.state.sidebar
+			//alert(`this.$store.state.sidebar${this.$store.state.sidebar}`)
+		}
 	}
-  }
 }
 </script>
 <style scoped>

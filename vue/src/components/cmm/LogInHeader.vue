@@ -5,7 +5,6 @@
 </div>
 </template>
 <script>
-import {store} from '../../store'
 import axios from 'axios'
 export default {
 	data(){
@@ -16,13 +15,13 @@ export default {
 	methods:{
 		logout(){
       alert(`로그아웃`)
-		store.state.person={}
-		store.state.authCheck=false
+		this.$store.state.person={}
+		this.$store.state.authCheck=false
       this.$router.push({path:'/login'})
 	},
 		withdrawl(){
-			alert(store.state.person.userid)
-			let url = `${this.context}/withdrawl/${store.state.person.userid}`
+			alert(this.$store.state.person.userid)
+			let url = `${this.context}/withdrawl/${this.$store.state.person.userid}`
 			axios.delete(url)
 			.then(()=>{
 				alert(`회원탈퇴`)

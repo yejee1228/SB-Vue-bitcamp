@@ -20,8 +20,7 @@
 </div>
 </template>
 <script>
-import axios from "axios"
-import {store} from "../../store"
+import { mapMutations } from 'vuex'
 export default {
   data(){
     return {
@@ -32,44 +31,14 @@ export default {
     }
   },
   methods: {
-    login(){
-      alert(`아이디 : ${this.userid} , 비밀번호 : ${this.passwd}`)
-      let url = `${this.context}/login`
-      let data = {
-        userid: this.userid,
-        passwd: this.passwd
-      }
-      let header = {
-        'autoorization': 'JWT fefege..',
-        'Accept' : 'application/json',
-        'Content-Type': 'application/json'
-      }
-      axios
-      .post(url, data, header)
-      .then(res=>{
-        if(res.data.result === "SUCCESS"){
-          alert(`로그인 성공 : ${this.userid}`)
-          store.state.person = res.data.person
-          store.state.authCheck = false
-          alert(`스토어에 저장 성공 ${store.state.person.name}`)
-          if(store.state.person.role !== 'student'){
-            store.state.sidebar = 'adminSidebar'
-            store.state.headerMessage = '관리자 화면'
-            this.$router.push({path: '/students'})
-          }else{
-            store.state.sidebar = 'studentSidebar'
-            store.state.headerMessage = '학생 화면'
-            this.$router.push({path: '/myPage'})
-          }
-        }else{
-          alert(`로그인 실패 `)
-          this.$router.push({path:'/login'})
-        }
-      })
-      .catch(()=>{
-        alert('AXIOS 실패')
-      })
-    }
+    ...mapMutations([
+      'increment', // this.increment()를 this.$store.commit('increment')에 매핑합니다.
+    ]),
+    ...mapMutations({
+      add: 'increment', // this.add()를 this.$store.commit('increment')에 매핑합니다.
+    })
+
+    
   }
 }
 </script>

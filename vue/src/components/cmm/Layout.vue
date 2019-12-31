@@ -38,7 +38,7 @@ header {
      padding: 0 15px;
 }
 #content {
-     width: 696px;
+     width: 750px;
      float: left;
      padding: 5px 15px;
     min-height: 300px;

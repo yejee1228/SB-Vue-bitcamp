@@ -23,12 +23,11 @@
   </table>
 </template>
 <script>
-import {store} from "../../store"
 export default{
 	data(){
 		return {
       context : 'http://localhost:8080/',
-      person : store.state.person,
+      person : this.$store.state.person,
       sidebars: [
 				{menu:"비밀번호 수정",link:"/update"}
       ],
