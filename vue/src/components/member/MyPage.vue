@@ -23,7 +23,7 @@
   </table>
 </template>
 <script>
-export default{
+export default {
 	data(){
 		return {
       context : 'http://localhost:8080/',

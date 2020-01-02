@@ -27,20 +27,16 @@ import AdminSidebar from "@/components/cmm/AdminSidebar.vue"
 import StudentSidebar from "@/components/cmm/StudentSidebar.vue"
 import PreSidebar from "@/components/cmm/PreSidebar.vue"
 export default {
-components : {Layout, LogInHeader, LogOutHeader, 
-							StudentSidebar, AdminSidebar, PreSidebar},
-	data(){
-		return{
-		}
-	},
+	components : {Layout, LogInHeader, LogOutHeader, 
+			StudentSidebar, AdminSidebar, PreSidebar},
 	computed: {
 		whichCompo () {
-			return this.$store.state.loginstate
-			//alert(`this.$store.state.loginstate${this.$store.state.loginstate}`)
+			return this.$store.state.common.loginstate
+			//alert(`this.$store.state.common.loginstate${this.$store.state.common.loginstate}`)
 		},
 		sidebarCheck : function () {
-			return this.$store.state.sidebar
-			//alert(`this.$store.state.sidebar${this.$store.state.sidebar}`)
+			return this.$store.state.common.sidebar
+			//alert(`this.$store.state.common.sidebar${this.$store.state.common.sidebar}`)
 		}
 	}
 }

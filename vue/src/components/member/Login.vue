@@ -1,44 +1,48 @@
 <template>
 <div class="login-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form method="post">
         <h2 class="text-center">Log in</h2>       
         <div class="form-group">
-            <input type="text" v-model="userid" class="form-control" placeholder="Username" required="required">
+            <input v-model="userid" type="text" class="form-control" placeholder="Username" required="required">
         </div>
         <div class="form-group">
-            <input type="password" v-model="passwd" class="form-control" placeholder="Password" required="required">
+            <input v-model="passwd" type="password" class="form-control" placeholder="Password" required="required">
         </div>
         <div class="form-group">
-            <button type="submit" @click.prevent="login" class="btn btn-primary btn-block">Log in</button>
+            <button type="submit" @click.prevent="login(userid, passwd)" class="btn btn-primary btn-block">Log in</button>
         </div>
         <div class="clearfix">
             <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
             <a href="#" class="pull-right">Forgot Password?</a>
         </div>        
     </form>
-    <p class="text-center"><a href="/join">Create an Account</a></p>
+    <p class="text-center"><a href="#">Create an Account</a></p>
 </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+//import {mapActions} from 'vuex'
 export default {
+  name: 'login',
   data(){
     return {
-      context: 'http://localhost:8080/',
+      context: this.$store.state.common.context,
       result: '',
-      userid: '',
-      passwd: ''
+      msg: '에러났다'
     }
   },
   methods: {
-    ...mapMutations([
-      'increment', // this.increment()를 this.$store.commit('increment')에 매핑합니다.
-    ]),
-    ...mapMutations({
-      add: 'increment', // this.add()를 this.$store.commit('increment')에 매핑합니다.
-    })
-
-    
+    login(uid, pwd){
+      alert(`login()`)
+      return this.$store.dispatch('admin/login', {context: this.context, userid:uid, passwd:pwd})
+            .then(()=>this.redirect())
+            .catch(({message})=>this.msg = message)
+            
+        },
+        /* ...mapActions('admin/login') */
+    redirect(){
+      alert(`redirect()`)
+        return this.$router.push({path:'/students'})
+    }
   }
 }
 </script>

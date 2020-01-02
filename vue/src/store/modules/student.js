@@ -1,15 +1,22 @@
-//import loginAPI from '@/api/loginAPI'
+import Constant from '@/store/modules/mutation_types'
 import axios from 'axios'
-import Constant from '@/store/mutation_types'
+import router from '@/router'
+import api from '@/api'
 
 const state = {
-	person : {}
+	person : {},
+	sidebar : 'studentSidebar',
 }
 const getters = {
-	getPerson : state => state.person
+	getPerson : state => state.person,
+	getSidebar : state => state.sidebar
 }
 const actions = {
-	async login(){
+	async student_login({commit, state}){
+		alert(`${this.userid} ,  ${this.passwd}`)
+		api.login(state.userid, state.passwd)
+		.then(data => commit('login', data.data))
+		.then(()=>{router.push({name: 'home'})})
 		alert(`아이디 : ${this.userid} , 비밀번호 : ${this.passwd}`)
 		let url = `${this.context}/login`
 		let data = {
@@ -89,6 +96,7 @@ const mutations = {
 }
 
 export default {
+	name : 'student',
 	namespaced : true, // 재활용할 수 있다.
 	state,
 	getters,

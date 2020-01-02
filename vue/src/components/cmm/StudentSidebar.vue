@@ -8,7 +8,8 @@
 	</div>
 </template>
 <script>
-export default{
+export default {
+	name: 'studentSidebar',
 	data(){
 		return {
 			sidebars : [

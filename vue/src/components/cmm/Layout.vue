@@ -23,7 +23,21 @@ export default {
 			sidebarText : 'sidebar',
 			footerText : 'foooooooooter'
 		}
-	}
+     },
+     computed: {
+          changeMessage: function () {
+               alert('>>> '+this.$store.state.admin.isAuth)
+               if(this.$store.state.common.isAuth){
+                    alert('로그인후')
+               }else{
+                    alert('로그인전')
+               }
+               return this.$store.state.admin.header
+          },
+          changeSidebars: function(){
+               return this.$store.state.common.changeSidebars
+          }
+     }
 }
 </script>
 <style scoped>
